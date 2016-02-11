@@ -14,6 +14,7 @@ module PublicProjectUserPatch
   module InstanceMethods
     def allowed_to_with_public_project?(action, context, options={}, &block)
       return true if allowed_to_without_public_project?(action, context, options, &block)
+      return false if context.nil?
       if action.is_a?(Hash)
         if action[:controller] == "issues"
           if action[:action] == "index"
